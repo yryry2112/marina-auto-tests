@@ -34,7 +34,7 @@ public class JUnitTest {
 
     @MethodSource("SearchValue")
     @ParameterizedTest(name = "{displayName} {0}")
-    @DisplayName("Позитивные проверки поиска по:")
+    @DisplayName("Позитивные проверки поиска:")
     public void shouldFindTest (String type, String value, String result) {
         //2.Кликнуть на кнопку Releases
         TestPages.JUnitPage.releasesButton().click();
