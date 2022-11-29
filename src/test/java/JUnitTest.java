@@ -37,12 +37,12 @@ public class JUnitTest {
     @DisplayName("Позитивные проверки поиска:")
     public void shouldFindTest (String type, String value, String result) {
         //2.Кликнуть на кнопку Releases
-        TestPages.JUnitPage.releasesButton().click();
+        TestPages.JUnitReleasePage.releasesButton().click();
         //3.Ввести значение, нажать энтер
-        TestPages.JUnitPage.releasesSearchInput()
+        TestPages.JUnitReleasePage.releasesSearchInput()
                 .setValue(value).pressEnter();
         //4.Проверить поиск по релизу
-        TestPages.JUnitPage.releasesBox()
+        TestPages.JUnitReleasePage.releasesBox()
                 .shouldHave(Condition.text(result));
 
 

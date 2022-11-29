@@ -16,15 +16,7 @@ public class JUnitPage {
 
     }
     public SelenideElement branchText() {
-        return $(byText("This branch is")).as("екст 'Эта ветвь");
+        return $(byText("This branch is")).as("Текст 'Эта ветвь");
     }
-    public SelenideElement releasesButton() {
-        return $(byText("Releases")).as("Кнопка Релизова");
-    }
-    public SelenideElement releasesSearchInput() {
-        return $("[id='release-filter']").as("Поле поиска");
-    }
-    public SelenideElement releasesBox() {
-        return $(".Box-body").as("Карточка релиза");
-    }
+
 }
