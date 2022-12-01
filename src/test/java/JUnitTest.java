@@ -38,11 +38,10 @@ public class JUnitTest {
                 .shouldBe(Condition.visible);
         });
     }
-
-    @MethodSource("SearchValue")
-    @ParameterizedTest(name = "{displayName} {0}")
     @Story("Поиск по релизам")
     @DisplayName("Позитивные проверки поиска:")
+    @MethodSource("SearchValue")
+    @ParameterizedTest(name = "{displayName} {0}")
     public void shouldFindTest (String type, String value, String result) {
         step("Кликнуть на кнопку Releases", () ->
                 TestPages.JUnitReleasePage.releasesButton().click());
