@@ -15,65 +15,50 @@ import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 @Owner("yryry_21")
-@Feature("Репозитории")
+@Feature("Репозитории junit-team")
 public class JUnitTest {
     @BeforeEach
     public void setup() {
-        //1.Открыть страницу https://github.com/junit-team/junit4
-        open("https://github.com/junit-team/junit4");
+        step("Открыть страницу гитхаба и кликнуть на кнопку sing in", () ->{
+            open("https://github.com/junit-team/junit4");
+        });
     }
 
     @Test
     @Story("Переключение веток")
     @DisplayName("Переход на ветку fixtures")
-    public void OpenFixturesBranch() {
-        step("Нажать на дропдаун переключения веток и выбрать ветку fixtures", () -> {
-        TestPages.JUnitPage.dropdown1()
+    public void openFixturesBranch() {
+        step("Нажать на дропдаун переключения веток и выбрать ветку fixtures, проверить, что произошел переход", () -> {
+            TestPages.JUnitPage.dropdown1()
                 .click();
-        TestPages.JUnitPage.fixturesButton()
+            TestPages.JUnitPage.fixturesButton()
                 .click();
-        });
-        step("Проверить, что произошел переход на ветку fixtures", () -> {
-        TestPages.JUnitPage. branchText()
+            TestPages.JUnitPage. branchText()
                 .shouldBe(Condition.visible);
         });
     }
-
-    @MethodSource("SearchValue")
-    @ParameterizedTest(name = "{displayName} {0}")
     @Story("Поиск по релизам")
     @DisplayName("Позитивные проверки поиска:")
+    @MethodSource("searchValue")
+    @ParameterizedTest(name = "{displayName} {0}")
     public void shouldFindTest (String type, String value, String result) {
-        step("Кликнуть на кнопку Releases", () ->
-                TestPages.JUnitReleasePage.releasesButton().click());
-        step("Ввести значение, нажать энтер", () -> {
-        TestPages.JUnitReleasePage.releasesSearchInput()
-                .setValue(value).pressEnter();
+        step("Кликнуть на кнопку Releases", () -> {
+            TestPages.JUnitReleasePage.releasesButton()
+                    .click();
         });
-        step("Проверить поиск по релизу", () -> {
-        TestPages.JUnitReleasePage.releasesBox()
-                .shouldHave(Condition.text(result));
+        step("Ввести значение, нажать энтер, проверить результат", () -> {
+            TestPages.JUnitReleasePage.releasesSearchInput()
+                    .setValue(value).pressEnter();
+            TestPages.JUnitReleasePage.releasesBox()
+                    .shouldHave(Condition.text(result));
         });
 
     }
-    static Stream<Arguments> SearchValue() {
+    static Stream<Arguments> searchValue() {
         return Stream.of(
-                arguments(
-                        "по номеру",
-                        "4.13.2",
-                        "4.13.2"
-
-                ),
-                arguments(
-                        "по буквам",
-                        "RC 2",
-                        "RC 2"
-                ),
-                arguments(
-                        "по буквам и цифрам",
-                        "JUnit 4.13 RC 2",
-                        "JUnit 4.13 RC 2"
-                )
+                arguments("по номеру", "4.13.2", "4.13.2"),
+                arguments("по буквам", "RC 2", "RC 2"),
+                arguments("по буквам и цифрам", "JUnit 4.13 RC 2", "JUnit 4.13 RC 2")
         );
 
     }

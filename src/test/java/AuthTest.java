@@ -15,8 +15,9 @@ public class AuthTest {
     @BeforeEach
     public  void setup(){
         step("Открыть страницу гитхаба и кликнуть на кнопку sing in", () ->{
-        open("https://github.com/");
-        TestPages.mainPage.mainSignInButton().click();
+            open("https://github.com/");
+            TestPages.mainPage.mainSignInButton()
+                .click();
         });
     }
 
@@ -24,23 +25,24 @@ public class AuthTest {
     @DisplayName("Успешная Авторизация")
     public void  shouldAuthorizeTest() {
         step("Заполнить импуты логина и пароля", () ->{
-        TestPages.mainPage.loginInput()
+            TestPages.mainPage.loginInput()
                 .sendKeys("yryry2112");
-        TestPages.mainPage.passwordInput()
+            TestPages.mainPage.passwordInput()
                 .sendKeys("my_parol");
         });
-        step("Нажать кнопку sign in", () -> TestPages.mainPage.signInButton()
-                .click());
-        step("Проверить авторизацию", () ->{
-         TestPages.basePage.header()
+        step("Нажать кнопку sign in и проверить авторизацию", () -> {
+            TestPages.mainPage.signInButton()
+                    .click();
+            TestPages.basePage.header()
                 .shouldBe(Condition.visible);
         });
-        step("Нажать на иконку с фото, чтобы раскрыть список", () ->
-                TestPages.basePage.dropdown()
-                .click());
-        step("Нажать 'Your profile'", () ->
-                TestPages.basePage.myProfileButton().click());
-        step("Проверить, что открылась страница с личным профилем", () -> {
+        step("Нажать на иконку с фото, чтобы раскрыть список", () -> {
+            TestPages.basePage.dropdown()
+                    .click();
+        });
+        step("Нажать 'Your profile и проверить имя", () ->{
+            TestPages.basePage.myProfileButton()
+                    .click();
             TestPages.basePage.nameLookup()
                 .shouldBe(Condition.visible);
         });

@@ -15,7 +15,7 @@ public class BasePage {
         return $("[href='/yryry2112?tab=repositories']").as("Кнопка 'Мой профиль'");
     }
     public SelenideElement  nameLookup() {
-        return $(".vcard-names").as("Имя на странице");
+        return $(".vcard-names").as("Текст имени на странице");
     }
 
 }
